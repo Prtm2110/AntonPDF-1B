@@ -1,6 +1,11 @@
 {
   "metadata": {
     "input_documents": [
+      "1.pdf",
+      "2.pdf",
+      "3.pdf",
+      "4.pdf",
+      "5.pdf",
       "monopoly.pdf",
       "ticket_to_ride.pdf"
     ],
@@ -9,51 +14,51 @@
   },
   "extracted_sections": [
     {
-      "document": "monopoly.pdf",
-      "section_title": "Mr. Monopoly: First, move the sum of the two white dice",
+      "document": "3.pdf",
+      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
       "rank": 1
     },
     {
-      "document": "monopoly.pdf",
-      "section_title": "Use the white dice ONLY when rolling to get out of jail.",
+      "document": "3_50pages.pdf",
+      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
       "rank": 2
     },
     {
-      "document": "monopoly.pdf",
-      "section_title": "Property Trading Game from Parker Brothers\"",
+      "document": "3_50pages.pdf",
+      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
       "rank": 3
     },
     {
-      "document": "monopoly.pdf",
-      "section_title": "Each player is given $1,500 divided as follows: P each of $500s,",
+      "document": "3_50pages.pdf",
+      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
       "rank": 4
     },
     {
-      "document": "ticket_to_ride.pdf",
-      "section_title": "u 1 Days of Wonder Online access number",
+      "document": "Adobe.pdf",
+      "section_title": "generation.",
       "rank": 5
     }
   ],
   "subsection_analysis": [
     {
-      "document": "monopoly.pdf",
-      "text": "Mr. Monopoly: First, move the sum of the two white dice and resolve the space you land on (such as drawing a card, buying the property, paying rent, etc.). Then, one of two things will happen dependin"
+      "document": "3.pdf",
+      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
     },
     {
-      "document": "monopoly.pdf",
-      "text": "Use the white dice ONLY when rolling to get out of jail. L Use the sum of all three dice when determining how much to pay on a utility. Note: The Bus and Mr. Monopoly are valued at 0. CLASSIC MONOPOW "
+      "document": "3_50pages.pdf",
+      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
     },
     {
-      "document": "monopoly.pdf",
-      "text": "Property Trading Game from Parker Brothers\" fast as playing with i't. / 1, 2, or 3: Add this number to the roll of the two white dice. You'll zoom around the board."
+      "document": "3_50pages.pdf",
+      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
     },
     {
-      "document": "monopoly.pdf",
-      "text": "Each player is given $1,500 divided as follows: P each of $500s, $ 1 0 0 ~ and $50~; 6 $40~; 5 each of $105, $ 5 ~ and $Is. All remaining money and other equipment go to the Bank. Stack the .. Bank's "
+      "document": "3_50pages.pdf",
+      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
     },
     {
-      "document": "ticket_to_ride.pdf",
-      "text": "u 1 Days of Wonder Online access number Setting up the Game \u222b \u2211 Place the board map in the center of the table. Each player takes a set of 45 Colored Train Cars along with its matching Scoring Marker."
+      "document": "Adobe.pdf",
+      "text": "generation. What You Need to Build You must build a solution that: \u2022 Accepts a PDF file (up to 50 pages) \u2022 Extracts: o Title o Headings: H1, H2, H3 (with level and page number) \u2022 Outputs a valid JSON "
     }
   ]
 }

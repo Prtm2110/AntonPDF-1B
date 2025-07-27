@@ -4,7 +4,15 @@
     "description": "This challenge involves creating a system that can perform semantic search and respond to queries based on the content of PDF documents.",
     "difficulty": "Intermediate"
   },
-  "documents": [ "/home/lord_grivous/Desktop/1Breal/AntonB/data/monopoly.pdf" , "/home/lord_grivous/Desktop/1Breal/AntonB/data/ticket_to_ride.pdf" ],
+  "documents": [ 
+    "/home/lord_grivous/Desktop/1Breal/AntonB/data/1.pdf",
+    "/home/lord_grivous/Desktop/1Breal/AntonB/data/2.pdf",
+    "/home/lord_grivous/Desktop/1Breal/AntonB/data/3.pdf",
+    "/home/lord_grivous/Desktop/1Breal/AntonB/data/4.pdf",
+    "/home/lord_grivous/Desktop/1Breal/AntonB/data/5.pdf",
+    "/home/lord_grivous/Desktop/1Breal/AntonB/data/monopoly.pdf",
+    "/home/lord_grivous/Desktop/1Breal/AntonB/data/ticket_to_ride.pdf"
+  ],
   "persona": { "role": "Game Pro" },
   "job_to_be_done": { "task": "Create and manage fillable forms for onboarding and compliance." }
 }
