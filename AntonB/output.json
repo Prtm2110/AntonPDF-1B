@@ -1,0 +1,70 @@
+{
+    "metadata": {
+        "input_documents": [
+            "/home/lord_grivous/Desktop/1Breal/AntonB/data/monopoly.pdf",
+            "/home/lord_grivous/Desktop/1Breal/AntonB/data/ticket_to_ride.pdf"
+        ],
+        "persona": "Game Pro",
+        "job_to_be_done": "Create and manage fillable forms for onboarding and compliance.",
+        "processing_timestamp": "2025-07-27T22:20:31.197916"
+    },
+    "extracted_sections": [
+        {
+            "document": "monopoly.pdf",
+            "section_title": "Mr. Monopoly: First, move the sum of the two white dice",
+            "importance_rank": 1,
+            "page_number": 2
+        },
+        {
+            "document": "monopoly.pdf",
+            "section_title": "Use the white dice ONLY when rolling to get out of jail.",
+            "importance_rank": 2,
+            "page_number": 2
+        },
+        {
+            "document": "monopoly.pdf",
+            "section_title": "**Property** **Trading** **Game from Parker Brothers\"**",
+            "importance_rank": 3,
+            "page_number": 1
+        },
+        {
+            "document": "monopoly.pdf",
+            "section_title": "**Each player** **is** **given** **$1,500** **divided** as follows: **`P`** **each** of **$500s,**",
+            "importance_rank": 4,
+            "page_number": 3
+        },
+        {
+            "document": "ticket_to_ride.pdf",
+            "section_title": "u 1 Days of Wonder Online access number",
+            "importance_rank": 5,
+            "page_number": 2
+        }
+    ],
+    "subsection_analysis": [
+        {
+            "document": "monopoly.pdf",
+            "refined_text": "Mr. Monopoly: First, move the sum of the two white dice\nand resolve the space you land on (such as drawing a card,\nbuying the property, paying rent, etc.). Then, one of two\nthings will happen dependin",
+            "page_number": 2
+        },
+        {
+            "document": "monopoly.pdf",
+            "refined_text": "Use the white dice ONLY when rolling to get out of jail.\n\n\n\n_**L**_\n\n\n\nUse the sum of all three dice when determining how much to pay on\na utility. Note: The Bus and Mr. Monopoly are valued at 0.\n\n\n**",
+            "page_number": 2
+        },
+        {
+            "document": "monopoly.pdf",
+            "refined_text": "**Property** **Trading** **Game from Parker Brothers\"**\n\nfast as playing with _i't._\n### /\n\n\n1, 2, or 3: Add this number to the roll of the two white\ndice. You'll zoom around the board.",
+            "page_number": 1
+        },
+        {
+            "document": "monopoly.pdf",
+            "refined_text": "**Each player** **is** **given** **$1,500** **divided** as follows: **`P`** **each** of **$500s,**\n**$ 1 0 0 ~** **and** **$50~;** **6** **$40~;** **5 each** of **$105, $ 5 ~** **and** $Is.\n\n\nAll rema",
+            "page_number": 3
+        },
+        {
+            "document": "ticket_to_ride.pdf",
+            "refined_text": "u 1 Days of Wonder Online access number\n\n## Setting up the Game\n\n\n### \u222b \u2211\n\n\n\nPlace the board map in the center of the table. Each player takes a set of 45 Colored\nTrain Cars along with its matching Sc",
+            "page_number": 2
+        }
+    ]
+}
