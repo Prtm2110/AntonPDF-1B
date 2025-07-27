@@ -1,1 +1,2 @@
-# rag-tutorial-v2
+# PDF - Smart Sementic Search and queury response 
+

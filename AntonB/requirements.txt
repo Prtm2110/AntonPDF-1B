@@ -1,3 +1,4 @@
+# pypdf
 fastembed
 langchain-chroma
 langchain-community
