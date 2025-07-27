@@ -28,9 +28,19 @@ def main():
 
 
 def load_documents():
-    document_loader = PyPDFDirectoryLoader(DATA_PATH)
-    return document_loader.load()
+    import pymupdf4llm
+    for file in os.listdir(DATA_PATH):
+        if file.endswith(".pdf"):
+            FILEPATH = os.path.join(DATA_PATH, file)
+            print(f"📄 Loading {FILEPATH}")
 
+            # Load the PDF file.
+            md_pages = pymupdf4llm.to_markdown(FILEPATH , page_chunks=True)
+            for i , page in enumerate(md_pages):
+                text = page["text"]
+                page_number = i + 1
+                documents.append(Document(page_content=text, metadata={"source": FILEPATH, "page": page_number}))
+    return documents
 
 def split_documents(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
