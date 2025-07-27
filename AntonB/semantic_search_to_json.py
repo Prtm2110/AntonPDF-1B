@@ -1,12 +1,13 @@
 """
 Library for building a Chroma vectorstore from PDFs and performing semantic searches,
-then formatting results as structured JSON.
+then formatting results as structured, cleaned JSON (stripped of markdown).
 """
 import json
 import os
 import shutil
+import re
 from datetime import datetime
-from typing import List, Dict, Any, Union, Optional
+from typing import List, Dict, Any, Optional
 
 from fastembed import TextEmbedding
 from langchain.schema.document import Document
@@ -14,10 +15,18 @@ from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
+def _clean_text(text: str) -> str:
+    """
+    Strip markdown punctuation (*, _, `, #), collapse whitespace.
+    """
+    # remove markdown symbols
+    no_md = re.sub(r"(\*|_|`|#{1,6})+", "", text)
+    # collapse whitespace
+    collapsed = re.sub(r"\s+", " ", no_md)
+    return collapsed.strip()
+
+
 class FastEmbedEmbeddings:
-    """
-    Embedding wrapper using fastembed.TextEmbedding
-    """
     def __init__(self):
         self.model = TextEmbedding()
 
@@ -29,7 +38,6 @@ class FastEmbedEmbeddings:
 
 
 def get_embedding_function() -> FastEmbedEmbeddings:
-    """Return a fresh embeddings instance"""
     return FastEmbedEmbeddings()
 
 
@@ -38,10 +46,7 @@ def load_and_split_documents(
     chunk_size: int = 800,
     chunk_overlap: int = 80
 ) -> List[Document]:
-    """
-    Load all PDFs under data_path, split into chunks, and return list of Documents.
-    """
-    documents: List[Document] = []
+    docs: List[Document] = []
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
@@ -54,28 +59,23 @@ def load_and_split_documents(
         full = os.path.join(data_path, fname)
         md_pages = __import__('pymupdf4llm').to_markdown(full, page_chunks=True)
         for i, page in enumerate(md_pages, start=1):
-            documents.append(
+            docs.append(
                 Document(
                     page_content=page['text'],
-                    metadata={'source': fname, 'page': i}
+                    metadata={'source': os.path.basename(fname), 'page': i}
                 )
             )
-    return splitter.split_documents(documents)
+    return splitter.split_documents(docs)
 
 
 def calculate_chunk_ids(chunks: List[Document]) -> None:
-    """
-    Mutates each Document in-place: adds a unique 'id' metadata field.
-    """
-    last_id: Optional[str] = None
+    last: Optional[str] = None
     idx = 0
-    for chunk in chunks:
-        src = chunk.metadata['source']
-        pg = chunk.metadata['page']
-        current = f"{src}:{pg}"
-        idx = idx + 1 if current == last_id else 0
-        chunk.metadata['id'] = f"{current}:{idx}"
-        last_id = current
+    for c in chunks:
+        key = f"{c.metadata['source']}:{c.metadata['page']}"
+        idx = idx + 1 if key == last else 0
+        c.metadata['id'] = f"{key}:{idx}"
+        last = key
 
 
 def build_chroma(
@@ -83,20 +83,14 @@ def build_chroma(
     persist_directory: str = 'chroma',
     reset: bool = False
 ) -> Chroma:
-    """
-    Build or update a Chroma vectorstore from the given chunks.
-    If reset=True, deletes persist_directory first.
-    Returns the Chroma instance.
-    """
     if reset and os.path.exists(persist_directory):
         shutil.rmtree(persist_directory)
     db = Chroma(persist_directory=persist_directory, embedding_function=get_embedding_function())
     calculate_chunk_ids(chunks)
     existing = set(db.get().get('ids', []))
-    new_chunks = [c for c in chunks if c.metadata['id'] not in existing]
-    if new_chunks:
-        ids = [c.metadata['id'] for c in new_chunks]
-        db.add_documents(documents=new_chunks, ids=ids)
+    new = [c for c in chunks if c.metadata['id'] not in existing]
+    if new:
+        db.add_documents(documents=new, ids=[c.metadata['id'] for c in new])
     return db
 
 
@@ -106,58 +100,59 @@ def query_and_format(
     query: str,
     top_k: int = 5
 ) -> Dict[str, Any]:
-    """
-    Execute semantic search for `query`, returning structured JSON.
-    `input_meta` should contain keys:
-      - documents: list of filenames or dicts with 'filename'
-      - persona: dict with 'role'
-      - job_to_be_done: dict with 'task'
-    """
     results = db.similarity_search_with_score(query, k=top_k)
-    # normalize input_documents
     raw = input_meta.get('documents', [])
-    docs_list = []
-    for item in raw:
-        if isinstance(item, dict) and 'filename' in item:
-            docs_list.append(item['filename'])
-        elif isinstance(item, str):
-            docs_list.append(item)
-    # build output
-    output = {
+    docs_list = [os.path.basename(item['filename']) if isinstance(item, dict) else os.path.basename(item)
+                 for item in raw]
+    out = {
         'metadata': {
             'input_documents': docs_list,
             'persona': input_meta.get('persona', {}).get('role', ''),
-            'job_to_be_done': input_meta.get('job_to_be_done', {}).get('task', ''),
-            'processing_timestamp': datetime.utcnow().isoformat()
+            'job_to_be_done': input_meta.get('job_to_be_done', {}).get('task', '')
         },
         'extracted_sections': [],
         'subsection_analysis': []
     }
-    # extracted_sections
-    for rank, (doc, _) in enumerate(results, start=1):
-        lines = doc.page_content.splitlines()
-        title = lines[0].strip() if lines else ''
-        output['extracted_sections'].append({
+    for rank, (doc, _) in enumerate(results, 1):
+        first_line = doc.page_content.splitlines()[0] if doc.page_content else ''
+        clean_title = _clean_text(first_line)
+        out['extracted_sections'].append({
             'document': doc.metadata['source'],
-            'section_title': title,
-            'importance_rank': rank,
-            'page_number': doc.metadata.get('page')
+            'section_title': clean_title,
+            'rank': rank
         })
-    # subsection_analysis
     for doc, _ in results:
-        text = doc.page_content.strip()
-        output['subsection_analysis'].append({
+        full_text = doc.page_content or ''
+        clean_snippet = _clean_text(full_text)[:200]
+        out['subsection_analysis'].append({
             'document': doc.metadata['source'],
-            'refined_text': text[:200],
-            'page_number': doc.metadata.get('page')
+            'text': clean_snippet
         })
-    return output
+    return out
 
-def Output_Analysis(query, input_json):
-    chunks = load_and_split_documents('data')
-    db = build_chroma(chunks, 'chroma', reset=True)
-    spec = json.load(open(input_json))
+
+def output_analysis(
+    query: str,
+    input_json_path: str,
+    data_path: str = 'data',
+    persist_directory: str = 'chroma',
+    reset: bool = True
+) -> Dict[str, Any]:
+    chunks = load_and_split_documents(data_path)
+    db = build_chroma(chunks, persist_directory, reset)
+    spec = json.load(open(input_json_path))
     result = query_and_format(db, spec, query)
-    print(json.dumps(result, indent=4))
+    print(json.dumps(result, indent=2))
     with open('output.json', 'w') as f:
-        json.dump(result, f, indent=4)
+        json.dump(result, f, indent=2)
+    return result
+
+
+def Output_Analysis(
+    query: str,
+    input_json_path: str
+) -> None:
+    result = output_analysis(query, input_json_path)
+
+# usage example:
+# result = output_analysis('create fillable forms', 'input.json')
