@@ -14,51 +14,51 @@
   },
   "extracted_sections": [
     {
-      "document": "3.pdf",
-      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
+      "document": "monopoly.pdf",
+      "section_title": "and auctions properties and hands out the~r proper Title Deed cards;",
       "rank": 1
     },
     {
-      "document": "3_50pages.pdf",
-      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
+      "document": "monopoly.pdf",
+      "section_title": "CLASSIC MONOPOW RULES",
       "rank": 2
     },
     {
-      "document": "3_50pages.pdf",
-      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
+      "document": "ticket_to_ride.pdf",
+      "section_title": "You are now ready to begin.",
       "rank": 3
     },
     {
-      "document": "3_50pages.pdf",
-      "section_title": "RFP: To Develop the Ontario Digital Library Business Plan",
+      "document": "ticket_to_ride.pdf",
+      "section_title": "Shuffle the Train Car cards and deal a starting hand of 4 cards to each player \u2211.",
       "rank": 4
     },
     {
-      "document": "Adobe.pdf",
-      "section_title": "generation.",
+      "document": "monopoly.pdf",
+      "section_title": "NO, there are no more properties in the bank -",
       "rank": 5
     }
   ],
   "subsection_analysis": [
     {
-      "document": "3.pdf",
-      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
+      "document": "monopoly.pdf",
+      "text": "and auctions properties and hands out the~r proper Title Deed cards; it sells houses and hotels to the players and loans money when required on mortgages. The Bank collects all taxes, fines, loans and"
     },
     {
-      "document": "3_50pages.pdf",
-      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
+      "document": "monopoly.pdf",
+      "text": "CLASSIC MONOPOW RULES OBJECT: The object of the game IS to become the wealthiest player through buying, renting and selling property. PREPARATION: Place the board on a table and put the Chance and Com"
     },
     {
-      "document": "3_50pages.pdf",
-      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
+      "document": "ticket_to_ride.pdf",
+      "text": "You are now ready to begin. Object of the Game The object of the game is to score the highest number of total points. Points can be scored by: u Claiming a Route between two adjacent cities on the map"
     },
     {
-      "document": "3_50pages.pdf",
-      "text": "RFP: To Develop the Ontario Digital Library Business Plan March 2003 9"
+      "document": "ticket_to_ride.pdf",
+      "text": "Shuffle the Train Car cards and deal a starting hand of 4 cards to each player \u2211. Place the remaining deck of Train Car cards near the board and turn the top five cards from the deck face-up \u220f. Place "
     },
     {
-      "document": "Adobe.pdf",
-      "text": "generation. What You Need to Build You must build a solution that: \u2022 Accepts a PDF file (up to 50 pages) \u2022 Extracts: o Title o Headings: H1, H2, H3 (with level and page number) \u2022 Outputs a valid JSON "
+      "document": "monopoly.pdf",
+      "text": "NO, there are no more properties in the bank - Advance to the NOCT property on which you will owe another player money. A few minor details: Only the white dice are used when determining if you rolled"
     }
   ]
 }

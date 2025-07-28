@@ -1,29 +1,51 @@
-import json
 import os
-import shutil
 import re
+import json
+import fitz  # PyMuPDF
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 
-import fitz  # PyMuPDF for fast text extraction
+# LangChain imports (offline-compatible)
 from fastembed import TextEmbedding
-from langchain.schema.document import Document
-from langchain_chroma import Chroma
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.schema import Document
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_community.llms import GPT4All
+from langchain.chains import RetrievalQA
 
 
 def _clean_text(text: str) -> str:
-    """
-    Strip markdown-like punctuation (*, _, `, #), collapse whitespace.
-    """
-    no_md = re.sub(r"(\*|_|`|#{1,6})+", "", text)
-    collapsed = re.sub(r"\s+", " ", no_md)
-    return collapsed.strip()
+    cleaned = re.sub(r"(\*|_|`|#{1,6})+", "", text)
+    return re.sub(r"\s+", " ", cleaned).strip()
 
 
-class FastEmbedEmbeddings:
-    def __init__(self):
-        self.model = TextEmbedding()
+def extract_and_split(
+    pdf_paths: List[str],
+    chunk_size: int = 800,
+    chunk_overlap: int = 80
+) -> List[Document]:
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        length_function=len,
+        is_separator_regex=False,
+    )
+    docs = []
+    for path in pdf_paths:
+        name = os.path.basename(path)
+        with fitz.open(path) as pdf:
+            for i, page in enumerate(pdf, start=1):
+                text = page.get_text("text") or ""
+                if text.strip():
+                    chunks = splitter.split_text(text)
+                    for chunk in chunks:
+                        docs.append(Document(page_content=chunk, metadata={"source": name, "page": i}))
+    return docs
+
+
+class FastEmbedWrapper:
+    def __init__(self, model: TextEmbedding):
+        self.model = model
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
         return list(self.model.embed(texts))
@@ -32,72 +54,55 @@ class FastEmbedEmbeddings:
         return list(self.model.embed([text]))[0]
 
 
-def get_embedding_function() -> FastEmbedEmbeddings:
-    return FastEmbedEmbeddings()
-
-
-def load_and_split_documents(
-    data_path: str,
-    chunk_size: int = 800,
-    chunk_overlap: int = 80
-) -> List[Document]:
-    """
-    Load all PDFs from data_path, extract text per page using PyMuPDF (fitz),
-    then split into chunks via LangChain splitter.
-    """
-    docs: List[Document] = []
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        length_function=len,
-        is_separator_regex=False,
-    )
-
-    for fname in sorted(os.listdir(data_path)):
-        if not fname.lower().endswith('.pdf'):
-            continue
-        full_path = os.path.join(data_path, fname)
-        pdf = fitz.open(full_path)
-        for i, page in enumerate(pdf, start=1):
-            text = page.get_text("text") or ""
-            if not text.strip():
-                continue
-            docs.append(
-                Document(
-                    page_content=text,
-                    metadata={"source": fname, "page": i}
-                )
-            )
-        pdf.close()
-
-    # split into manageable chunks
-    return splitter.split_documents(docs)
-
-
-def calculate_chunk_ids(chunks: List[Document]) -> None:
-    last: Optional[str] = None
-    idx = 0
-    for c in chunks:
-        key = f"{c.metadata['source']}:{c.metadata['page']}"
-        idx = idx + 1 if key == last else 0
-        c.metadata['id'] = f"{key}:{idx}"
-        last = key
-
-
-def build_chroma(
-    chunks: List[Document],
-    persist_directory: str = 'chroma',
-    reset: bool = False
+def build_and_persist(
+    pdf_dir: str,
+    persist_dir: str = "chroma",
+    reset: bool = True,
+    spec_path: Optional[str] = None
 ) -> Chroma:
-    if reset and os.path.exists(persist_directory):
-        shutil.rmtree(persist_directory)
-    db = Chroma(persist_directory=persist_directory, embedding_function=get_embedding_function())
-    calculate_chunk_ids(chunks)
-    existing = set(db.get().get('ids', []))
-    new = [c for c in chunks if c.metadata['id'] not in existing]
-    if new:
-        db.add_documents(documents=new, ids=[c.metadata['id'] for c in new])
-    return db
+    if os.path.isdir(pdf_dir):
+        pdfs = [os.path.join(pdf_dir, f)
+                for f in sorted(os.listdir(pdf_dir))
+                if f.lower().endswith('.pdf')]
+    elif spec_path and os.path.isfile(spec_path):
+        spec = json.load(open(spec_path, 'r'))
+        docs = spec.get('documents', [])
+        pdfs = [os.path.abspath(item['filename'] if isinstance(item, dict) else item)
+                for item in docs]
+    else:
+        raise FileNotFoundError(f"No PDFs found in '{pdf_dir}' and no valid spec provided.")
+
+    if reset and os.path.exists(persist_dir):
+        import shutil
+        shutil.rmtree(persist_dir)
+
+    embeddings = FastEmbedWrapper(TextEmbedding())
+    vectordb = Chroma.from_documents(
+        documents=extract_and_split(pdfs),
+        embedding=embeddings,
+        persist_directory=persist_dir
+    )
+    vectordb.persist()
+    return vectordb
+
+
+def make_offline_qa_chain(
+    vectordb: Chroma,
+    model_path: str = "models/gpt4all-model.bin",
+    n_ctx: int = 2048,
+    n_threads: int = 4
+) -> RetrievalQA:
+    llm = GPT4All(
+        model=model_path,
+        n_ctx=n_ctx,
+        n_threads=n_threads
+    )
+    return RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=vectordb.as_retriever(search_kwargs={"k": 4}),
+        return_source_documents=True
+    )
 
 
 def query_and_format(
@@ -107,37 +112,43 @@ def query_and_format(
     top_k: int = 5
 ) -> Dict[str, Any]:
     results = db.similarity_search_with_score(query, k=top_k)
-    raw = input_meta.get('documents', [])
-    docs_list = [os.path.basename(item['filename']) if isinstance(item, dict) else os.path.basename(item)
-                 for item in raw]
 
-    out = {
-        'metadata': {
-            'input_documents': docs_list,
-            'persona': input_meta.get('persona', {}).get('role', ''),
-            'job_to_be_done': input_meta.get('job_to_be_done', {}).get('task', '')
-        },
-        'extracted_sections': [],
-        'subsection_analysis': []
+    docs_list = []
+    for item in input_meta.get("documents", []):
+        fn = item["filename"] if isinstance(item, dict) else item
+        docs_list.append(os.path.basename(fn))
+
+    meta = {
+        "input_documents": docs_list,
+        "persona": input_meta.get("persona", {}).get("role", ""),
+        "job_to_be_done": input_meta.get("job_to_be_done", {}).get("task", ""),
+        "processing_timestamp": datetime.utcnow().isoformat()
     }
 
-    for rank, (doc, _) in enumerate(results, 1):
-        first_line = doc.page_content.splitlines()[0] if doc.page_content else ''
-        clean_title = _clean_text(first_line)
-        out['extracted_sections'].append({
-            'document': doc.metadata['source'],
-            'section_title': clean_title,
-            'rank': rank
+    extracted = []
+    for rank, (doc, _) in enumerate(results, start=1):
+        first_line = doc.page_content.splitlines()[0] if doc.page_content else ""
+        extracted.append({
+            "document": doc.metadata["source"],
+            "section_title": _clean_text(first_line),
+            "importance_rank": rank,
+            "page_number": doc.metadata.get("page", None)
         })
 
+    analysis = []
     for doc, _ in results:
-        full_text = doc.page_content or ''
-        clean_snippet = _clean_text(full_text)[:200]
-        out['subsection_analysis'].append({
-            'document': doc.metadata['source'],
-            'text': clean_snippet
+        snippet = _clean_text(doc.page_content)[:300]
+        analysis.append({
+            "document": doc.metadata["source"],
+            "refined_text": snippet,
+            "page_number": doc.metadata.get("page", None)
         })
-    return out
+
+    return {
+        "metadata": meta,
+        "extracted_sections": extracted,
+        "subsection_analysis": analysis
+    }
 
 
 def output_analysis(
@@ -147,22 +158,27 @@ def output_analysis(
     persist_directory: str = 'chroma',
     reset: bool = True
 ) -> Dict[str, Any]:
-    chunks = load_and_split_documents(data_path)
-    db = build_chroma(chunks, persist_directory, reset)
-    spec = json.load(open(input_json_path))
-    result = query_and_format(db, spec, query)
+    with open(input_json_path) as f:
+        spec = json.load(f)
+
+    db = build_and_persist(
+        pdf_dir=data_path,
+        persist_dir=persist_directory,
+        reset=reset,
+        spec_path=input_json_path
+    )
+
+    return query_and_format(db, spec, query)
+
+
+# Run
+if __name__ == "__main__":
+    result = output_analysis(
+        query="How to play Monopoly",
+        input_json_path="input_small.json",
+        data_path="data",  # or override if directory doesn't exist
+        persist_directory="chroma",
+        reset=True
+    )
+
     print(json.dumps(result, indent=2))
-    with open('output.json', 'w') as f:
-        json.dump(result, f, indent=2)
-    return result
-
-
-def Output_Analysis(
-    query: str,
-    input_json_path: str
-) -> None:
-    output_analysis(query, input_json_path)
-
-# usage example:
-result = output_analysis('create fillable forms', 'input.json')
-print(result)   
