@@ -1,8 +1,8 @@
-# 📚 PDF Smart Semantic Search & Query Response
+# Anton1B - PDF Smart Semantic Search & Query Response
 
-An intelligent PDF processing system that extracts structured information from PDF collections and provides semantic search capabilities for document analysis.
+An intelligent PDF processing system that extracts structured information from PDF collections and provides semantic search capabilities for document analysis. Built on the outline PDF extractor from Anton1A, Anton1B delivers exceptional performance even when processing large numbers of files.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 git clone https://github.com/Prtm2110/AntonPDF-1B.git
@@ -10,15 +10,16 @@ cd Anton1B
 pip install -r requirements.txt
 ```
 
-## 🔧 Features
+## Features
 
-- **Batch PDF Processing**: Process multiple PDF collections simultaneously
-- **Intelligent Content Extraction**: Extract titles, outlines, and structured data
+- **Batch PDF Processing**: Process multiple PDF collections simultaneously with exceptional speed
+- **High Performance**: Built on Anton1A's outline PDF extractor, optimized for large file volumes
+- **Intelligent Content Extraction**: Extract titles, outlines, and structured data efficiently
 - **Semantic Search**: Advanced document search and query capabilities
 - **JSON Output**: Structured data output for easy integration
 - **Flexible Configuration**: Customizable input/output directories
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Anton1B/
@@ -36,9 +37,9 @@ Anton1B/
 └── requirements.txt         # Python dependencies
 ```
 
-## 🛠️ PDF Processing with LLM4
+## PDF Processing with LLM4
 
-The `llm4_to_json.py` script processes PDF collections and extracts structured information using advanced language models.
+The `llm4_to_json.py` script processes PDF collections and extracts structured information using advanced language models. Leveraging the fast outline extractor from Anton1A, it handles large document collections with exceptional performance.
 
 ### Process All Collections at Once
 
@@ -47,11 +48,11 @@ python llm4_to_json.py --all
 ```
 
 **What this does:**
-- 📖 Reads all `challenge1b_input.json` files from each Collection folder
-- 🔍 Processes all PDFs in each collection's PDFs directory
-- 📊 Extracts document outlines, titles, and hierarchical structure
-- 💾 Saves results to `challenge_outputs_json/` with descriptive filenames
-- ⚡ Provides progress feedback and error handling
+- Reads all `challenge1b_input.json` files from each Collection folder
+- Processes all PDFs in each collection's PDFs directory with high speed
+- Extracts document outlines, titles, and hierarchical structure efficiently
+- Saves results to `challenge_outputs_json/` with descriptive filenames
+- Provides progress feedback and error handling
 
 ### Process a Single Collection
 
@@ -75,7 +76,7 @@ Use your own directory structure for maximum flexibility.
 python llm4_to_json.py --help
 ```
 
-## 📊 Output Format
+## Output Format
 
 Generated JSON files contain:
 
@@ -98,7 +99,7 @@ Generated JSON files contain:
 }
 ```
 
-## 📝 Input Configuration
+## Input Configuration
 
 Each collection requires a `challenge1b_input.json` file (see `example_input.json` for template):
 
@@ -124,7 +125,7 @@ Each collection requires a `challenge1b_input.json` file (see `example_input.jso
 }
 ```
 
-## 🔍 Semantic Search (Legacy)
+## Semantic Search (Legacy)
 
 For advanced semantic search capabilities using vector embeddings and ChromaDB:
 
@@ -153,12 +154,12 @@ python3 src/semantic_search.py "challenge_pdfs/Collection 3/challenge1b_input.js
 
 ### What Semantic Search Does
 
-- 🧠 **Vector Embeddings**: Creates semantic representations of document content
-- 🔍 **Similarity Search**: Finds contextually relevant information across documents
-- 📊 **ChromaDB Integration**: Efficient vector storage and retrieval
-- 🎯 **Query-based Results**: Returns most relevant sections based on semantic meaning
+- **Vector Embeddings**: Creates semantic representations of document content
+- **Similarity Search**: Finds contextually relevant information across documents
+- **ChromaDB Integration**: Efficient vector storage and retrieval
+- **Query-based Results**: Returns most relevant sections based on semantic meaning
 
-## 📦 Dependencies
+## Dependencies
 
 - `pymupdf4llm` - PDF text extraction and processing
 - `fastembed` - Fast embedding generation
@@ -166,17 +167,19 @@ python3 src/semantic_search.py "challenge_pdfs/Collection 3/challenge1b_input.js
 - `langchain-community` - Community tools and integrations
 - `langchain-text-splitters` - Text chunking and splitting
 
-## ⚙️ Technical Approach
+## Technical Approach
 
-The system uses a multi-stage processing pipeline:
+The system uses a multi-stage processing pipeline built on Anton1A's fast outline extractor:
 
-1. **PDF Text Extraction**: Converts PDFs to markdown using PyMuPDF4LLM
-2. **Content Parsing**: Extracts hierarchical structure (headings, sections)
-3. **Text Normalization**: Handles unicode, formatting, and punctuation cleanup
-4. **Structure Analysis**: Identifies document outlines and importance rankings
+1. **PDF Text Extraction**: Converts PDFs to markdown using PyMuPDF4LLM with optimized performance
+2. **Content Parsing**: Extracts hierarchical structure (headings, sections) at high speed
+3. **Text Normalization**: Handles unicode, formatting, and punctuation cleanup efficiently
+4. **Structure Analysis**: Identifies document outlines and importance rankings rapidly
 5. **JSON Serialization**: Outputs structured data for downstream processing
 
-## 🤝 Contributing
+The Anton1A foundation ensures exceptional performance even when processing large numbers of files simultaneously.
+
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -184,11 +187,11 @@ The system uses a multi-stage processing pipeline:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
-This project is part of the AntornPDF-1B challenge system.
+This project is part of the Anton1B challenge system.
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **Common Issues:**
 
