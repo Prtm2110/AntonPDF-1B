@@ -17,50 +17,50 @@
   "extracted_sections": [
     {
       "document": "Dinner Ideas - Mains_1.pdf",
-      "section_title": "\uf0b7",
+      "section_title": "•",
       "rank": 1
     },
     {
       "document": "Dinner Ideas - Sides_1.pdf",
-      "section_title": "o Breadsticks",
+      "section_title": "Breadsticks",
       "rank": 2
     },
     {
       "document": "Lunch Ideas.pdf",
-      "section_title": "\u2022",
+      "section_title": "•",
       "rank": 3
     },
     {
       "document": "Dinner Ideas - Mains_2.pdf",
-      "section_title": "\uf0b7",
+      "section_title": "•",
       "rank": 4
     },
     {
       "document": "Lunch Ideas.pdf",
-      "section_title": "\u2022",
+      "section_title": "•",
       "rank": 5
     }
   ],
   "subsection_analysis": [
     {
       "document": "Dinner Ideas - Mains_1.pdf",
-      "text": "\uf0b7 1 eggplant, diced \uf0b7 1 zucchini, diced \uf0b7 1 bell pepper, diced \uf0b7 1 small onion, diced \uf0b7 2 cloves garlic, minced \uf0b7 4 tomatoes, diced"
+      "text": "1 eggplant, diced • 1 zucchini, diced • 1 bell pepper, diced • 1 small onion, diced • 2 cloves garlic, minced • 4 tomatoes, diced"
     },
     {
       "document": "Dinner Ideas - Sides_1.pdf",
-      "text": "O Breadsticks \uf0b7 Instructions: o Arrange meats, cheeses, olives, and vegetables on a platter. o Serve with breadsticks"
+      "text": "Breadsticks • Instructions: Arrange meats, cheeses, olives, and vegetables on a platter. Serve with breadsticks."
     },
     {
       "document": "Lunch Ideas.pdf",
-      "text": "- 2 slices whole grain bread - 1/2 cup roasted eggplant slices - 1/4 cup hummus - 1/4 cup baby spinach - 1/4 cup roasted red peppers, sliced Instructions:"
+      "text": "2 slices whole grain bread - 1/2 cup roasted eggplant slices - 1/4 cup hummus - 1/4 cup baby spinach - 1/4 cup roasted red peppers, sliced. Instructions:"
     },
     {
       "document": "Dinner Ideas - Mains_2.pdf",
-      "text": "\uf0b7 Cook for 1 hour until chicken is tender. \uf0b7 Serve warm"
+      "text": "Cook for 1 hour until chicken is tender. • Serve warm."
     },
     {
       "document": "Lunch Ideas.pdf",
-      "text": "- 1 cup cooked chicken breast, diced - 1/2 avocado, diced - 1/4 cup cherry tomatoes, halved - 1/4 cup red onion, finely chopped - 2 tablespoons olive oil - 1 tablespoon lemon juice - Salt"
+      "text": "1 cup cooked chicken breast, diced - 1/2 avocado, diced - 1/4 cup cherry tomatoes, halved - 1/4 cup red onion, finely chopped - 2 tablespoons olive oil - 1 tablespoon lemon juice - Salt and pepper to taste."
     }
   ]
 }

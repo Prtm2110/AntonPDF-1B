@@ -50,23 +50,23 @@
   "subsection_analysis": [
     {
       "document": "Learn Acrobat - Request e-signatures_1.pdf",
-      "text": "- Supports form field detection (highlighted in green) - Supports Prefill fields (highlighted in pink) - Supports field assignment (highlighted in purple and pink) - Supports field validation"
+      "text": "Supports form field detection (highlighted in green). - Supports Prefill fields (highlighted in pink). - Supports field assignment (highlighted in purple and pink). - Supports field validation."
     },
     {
       "document": "Learn Acrobat - Request e-signatures_1.pdf",
-      "text": "- Download Form Field Data - Downloads a CSV file of the field-level content for all child agreements spawned from this parent Bulk Send that have been completed. - Download Individual Files - Pro"
+      "text": "Download Form Field Data - Downloads a CSV file of the field-level content for all child agreements spawned from this parent Bulk Send that have been completed. - Download Individual Files - Provides individual file downloads."
     },
     {
       "document": "Learn Acrobat - Fill and Sign.pdf",
-      "text": "Change flat forms to fillable (Acrobat Pro) You can change a flat form to a fillable form by either using the Prepare Form tool or enabling the Fill & Sign tools. Acrobat and Acrobat Reader users ca"
+      "text": "Change flat forms to fillable (Acrobat Pro): You can change a flat form to a fillable form by either using the Prepare Form tool or enabling the Fill & Sign tools. Acrobat and Acrobat Reader users can..."
     },
     {
       "document": "Learn Acrobat - Fill and Sign.pdf",
-      "text": "2. Select anywhere in the form to access options, such as radio buttons. Select inside a text field to type. Press Tab to move forward or Shift+Tab to move backward. 3. When finished, submit the"
+      "text": "Select anywhere in the form to access options, such as radio buttons. Select inside a text field to type. Press Tab to move forward or Shift+Tab to move backward. 3. When finished, submit the form."
     },
     {
       "document": "Learn Acrobat - Create and Convert_1.pdf",
-      "text": "4. If prompted, enter your user name and password to log in to the Adobe LiveCycleRights Management Server. Create a PDF and send it for review 1. Open the file in the application used to create"
+      "text": "If prompted, enter your user name and password to log in to the Adobe LiveCycle Rights Management Server. Create a PDF and send it for review: 1. Open the file in the application used to create it."
     }
   ]
 }
