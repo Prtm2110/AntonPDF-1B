@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "input_documents": [
+      "South of France - Cities.pdf",
+      "South of France - Cuisine.pdf",
+      "South of France - History.pdf",
+      "South of France - Restaurants and Hotels.pdf",
+      "South of France - Things to Do.pdf",
+      "South of France - Tips and Tricks.pdf",
+      "South of France - Traditions and Culture.pdf"
+    ],
+    "persona": "Travel Planner",
+    "job_to_be_done": "Plan a trip of 4 days for a group of 10 college friends."
+  },
+  "extracted_sections": [
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "horseback riding, bird watching, and boat tours.",
+      "rank": 1
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "section_title": "Conclusion",
+      "rank": 2
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Outdoor Activities",
+      "rank": 3
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "\u2022",
+      "rank": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "\u2022",
+      "rank": 5
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "South of France - Things to Do.pdf",
+      "text": "Horseback riding, bird watching, and boat tours. - Various Locations: Try tree-top adventure parks with zip lines, rope bridges, and climbing challenges. - Gorges du Tarn: Go on a family-friendly"
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "text": "Conclusion Packing for a trip to the South of France involves considering the season, planned activities, and the needs of both adults and children. By following this comprehensive guide and incorp"
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "text": "Outdoor Activities The diverse landscapes of the South of France o\ufb00er plenty of opportunities for outdoor adventures: Hiking and Biking - Verdon Gorge: Known as the \"Grand Canyon of Europe,\" o\ufb00er"
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "text": "- Avignon: Explore the largest Gothic palace in Europe, Palais des Papes. - Carcassonne: Wander through the medieval citadel with its double walls and 52 towers. - Arles: Visit the Roman amphith"
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "text": "- Monaco: Explore the Mus\u00e9e Oc\u00e9anographique and its marine exhibits, including a shark lagoon and touch tanks. - Dordogne: See ancient cave paintings at prehistoric sites like Lascaux and Rou\ufb03gnac"
+    }
+  ]
+}

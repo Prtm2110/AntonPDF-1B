@@ -27,46 +27,46 @@
       "rank": 1
     },
     {
-      "document": "Learn Acrobat - Fill and Sign.pdf",
-      "section_title": "Change flat forms to fillable (Acrobat Pro)",
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "section_title": "\u2022",
       "rank": 2
     },
     {
       "document": "Learn Acrobat - Fill and Sign.pdf",
-      "section_title": "2. Select anywhere in the form to access options, such as radio buttons. Select inside a",
+      "section_title": "Change flat forms to fillable (Acrobat Pro)",
       "rank": 3
+    },
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "section_title": "2. Select anywhere in the form to access options, such as radio buttons. Select inside a",
+      "rank": 4
     },
     {
       "document": "Learn Acrobat - Create and Convert_1.pdf",
       "section_title": "4. If prompted, enter your user name and password to log in to the Adobe",
-      "rank": 4
-    },
-    {
-      "document": "The Ultimate PDF Sharing Checklist.pdf",
-      "section_title": "\u2022 Did you enter the email addresses of clients, agents, and other",
       "rank": 5
     }
   ],
   "subsection_analysis": [
     {
       "document": "Learn Acrobat - Request e-signatures_1.pdf",
-      "text": "\u2022. Download Form Field Data - Downloads a CSV file of the field-level content for all. child agreements spawned from this parent Bulk Send that have been completed.. \u2022. Download Individual Files - Pro"
+      "text": "- Supports form field detection (highlighted in green) - Supports Prefill fields (highlighted in pink) - Supports field assignment (highlighted in purple and pink) - Supports field validation"
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "text": "- Download Form Field Data - Downloads a CSV file of the field-level content for all child agreements spawned from this parent Bulk Send that have been completed. - Download Individual Files - Pro"
     },
     {
       "document": "Learn Acrobat - Fill and Sign.pdf",
-      "text": "Change flat forms to fillable (Acrobat Pro). You can change a flat form to a fillable form by either using the Prepare Form tool or. enabling the Fill & Sign tools. Acrobat and Acrobat Reader users ca"
+      "text": "Change flat forms to fillable (Acrobat Pro) You can change a flat form to a fillable form by either using the Prepare Form tool or enabling the Fill & Sign tools. Acrobat and Acrobat Reader users ca"
     },
     {
       "document": "Learn Acrobat - Fill and Sign.pdf",
-      "text": "2. Select anywhere in the form to access options, such as radio buttons. Select inside a. text field to type.. Press Tab to move forward or Shift+Tab to move backward.. 3. When finished, submit the"
+      "text": "2. Select anywhere in the form to access options, such as radio buttons. Select inside a text field to type. Press Tab to move forward or Shift+Tab to move backward. 3. When finished, submit the"
     },
     {
       "document": "Learn Acrobat - Create and Convert_1.pdf",
-      "text": "4. If prompted, enter your user name and password to log in to the Adobe. LiveCycleRights Management Server.. Create a PDF and send it for review. 1. Open the file in the application used to create"
-    },
-    {
-      "document": "The Ultimate PDF Sharing Checklist.pdf",
-      "text": "\u2022 Did you enter the email addresses of clients, agents, and other. stakeholders?. \u2022 Customize Your Message. \u2022 Have you added a personal touch to the subject and message. fields, highlighting key prop"
+      "text": "4. If prompted, enter your user name and password to log in to the Adobe LiveCycleRights Management Server. Create a PDF and send it for review 1. Open the file in the application used to create"
     }
   ]
 }
