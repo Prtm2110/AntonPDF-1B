@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "input_documents": [
+      "Breakfast Ideas.pdf",
+      "Dinner Ideas - Mains_1.pdf",
+      "Dinner Ideas - Mains_2.pdf",
+      "Dinner Ideas - Mains_3.pdf",
+      "Dinner Ideas - Sides_1.pdf",
+      "Dinner Ideas - Sides_2.pdf",
+      "Dinner Ideas - Sides_3.pdf",
+      "Dinner Ideas - Sides_4.pdf",
+      "Lunch Ideas.pdf"
+    ],
+    "persona": "Food Contractor",
+    "job_to_be_done": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items."
+  },
+  "extracted_sections": [
+    {
+      "document": "Lunch Ideas.pdf",
+      "section_title": "\u2022",
+      "rank": 1
+    },
+    {
+      "document": "Breakfast Ideas.pdf",
+      "section_title": "\u2022",
+      "rank": 2
+    },
+    {
+      "document": "Lunch Ideas.pdf",
+      "section_title": "\u2022",
+      "rank": 3
+    },
+    {
+      "document": "Lunch Ideas.pdf",
+      "section_title": "\u2022",
+      "rank": 4
+    },
+    {
+      "document": "Dinner Ideas - Sides_1.pdf",
+      "section_title": "o 2-3 Thai chilies",
+      "rank": 5
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "Lunch Ideas.pdf",
+      "text": "\u2022. 1 cup cooked chicken breast, diced. \u2022. 1/2 avocado, diced. \u2022. 1/4 cup cherry tomatoes, halved. \u2022. 1/4 cup red onion, finely chopped. \u2022. 2 tablespoons olive oil. \u2022. 1 tablespoon lemon juice. \u2022. Salt"
+    },
+    {
+      "document": "Breakfast Ideas.pdf",
+      "text": "\u2022. Blend until smooth.. \u2022. Serve immediately.. Breakfast Pizza. Ingredients:. \u2022. 1 pre-made pizza crust. \u2022. 1/2 cup marinara sauce. \u2022. 1 cup shredded mozzarella cheese. \u2022. 2 large eggs. \u2022. 1/4 c"
+    },
+    {
+      "document": "Lunch Ideas.pdf",
+      "text": "\u2022. 1/4 cup spinach, chopped. \u2022. 1/4 cup shredded carrots. \u2022. 1 tablespoon tahini. \u2022. 1 tablespoon lemon juice. \u2022. Salt and pepper to taste. Instructions:. \u2022. In a bowl, combine the mashed chickpeas, s"
+    },
+    {
+      "document": "Lunch Ideas.pdf",
+      "text": "\u2022. Lay the tortilla flat and spread the cranberry sauce evenly.. \u2022. Add the turkey, spinach, and carrots.. \u2022. Roll up the tortilla tightly and slice in half.. Caprese Salad. Ingredients:. \u2022. 1 c"
+    },
+    {
+      "document": "Dinner Ideas - Sides_1.pdf",
+      "text": "O 2-3 Thai chilies. o 2 tablespoons fish sauce. o 2 tablespoons tamarind paste. o 1 tablespoon sugar. o 1/4 cup cilantro. \uf0b7. Instructions:. o Bring fish stock to a boil.. o Add lemongrass, chilies, an"
+    }
+  ]
+}

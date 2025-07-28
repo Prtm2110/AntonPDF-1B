@@ -154,8 +154,18 @@ def get_json_result_for_query(
     # Make paths absolute and robust
     data_path = spec.get('data_path')
     if not data_path:
-        # Default to 'data' directory relative to the input spec file
-        data_path = os.path.join(spec_dir, 'data')
+        # Try common directory names relative to the input spec file
+        common_dir_names = ['data', 'PDFs', 'pdfs', 'documents', 'docs']
+        data_path = None
+        for dir_name in common_dir_names:
+            candidate_path = os.path.join(spec_dir, dir_name)
+            if os.path.exists(candidate_path):
+                data_path = candidate_path
+                break
+        
+        if not data_path:
+            # Default to 'data' directory for error message consistency
+            data_path = os.path.join(spec_dir, 'data')
     else:
         # If relative path, make it relative to the spec file directory
         if not os.path.isabs(data_path):
