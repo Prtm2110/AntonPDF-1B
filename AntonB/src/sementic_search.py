@@ -143,7 +143,7 @@ def query_and_format(
 def output_analysis(
     query: str,
     input_json_path: str,
-    data_path: str = 'data',
+    data_path: str = '../data',
     persist_directory: str = 'chroma',
     reset: bool = True
 ) -> Dict[str, Any]:
@@ -153,7 +153,7 @@ def output_analysis(
         spec = json.load(f)
     result = query_and_format(db, spec, query)
 
-    with open('output.json', 'w') as f_out:
+    with open('../output.json', 'w') as f_out:
         json.dump(result, f_out, indent=2)
     print(json.dumps(result, indent=2))
     return result
@@ -166,4 +166,4 @@ def Output_Analysis(
     _ = output_analysis(query, input_json_path)
 
 # usage:
-Output_Analysis('how to play monopoly', 'input_small.json')
+Output_Analysis("The ODL will be a partnership-based organization providing seamless electronic information services and resources to the citizens of Ontario.", '../input.json')

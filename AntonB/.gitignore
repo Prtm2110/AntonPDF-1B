@@ -50,6 +50,7 @@ Thumbs.db
 # Project specific
 chroma/
 emb_models/
+models/
 backup/
 *.db
 *.sqlite3
