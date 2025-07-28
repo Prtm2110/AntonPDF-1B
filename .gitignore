@@ -120,5 +120,4 @@ Thumbs.db
 src/chroma/
 src/chroma/chroma.sqlite3
 emb_models/
-*.pdf
 # output.json
