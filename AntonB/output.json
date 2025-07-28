@@ -2,6 +2,8 @@
   "metadata": {
     "input_documents": [
       "monopoly.pdf",
+      "2.pdf",
+      "1.pdf",
       "ticket_to_ride.pdf"
     ],
     "persona": "Game Pro",
