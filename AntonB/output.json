@@ -1,11 +1,6 @@
 {
   "metadata": {
     "input_documents": [
-      "1.pdf",
-      "2.pdf",
-      "3.pdf",
-      "4.pdf",
-      "5.pdf",
       "monopoly.pdf",
       "ticket_to_ride.pdf"
     ],
@@ -15,50 +10,50 @@
   "extracted_sections": [
     {
       "document": "monopoly.pdf",
-      "section_title": "and auctions properties and hands out the~r proper Title Deed cards;",
+      "section_title": "MONOPOLY",
       "rank": 1
     },
     {
       "document": "monopoly.pdf",
-      "section_title": "CLASSIC MONOPOW RULES",
+      "section_title": "Bus: This lets you \"get off the bus early.\" Look at the two white",
       "rank": 2
     },
     {
-      "document": "ticket_to_ride.pdf",
-      "section_title": "You are now ready to begin.",
+      "document": "monopoly.pdf",
+      "section_title": "and auctions properties and hands out the~r proper Title Deed cards;",
       "rank": 3
-    },
-    {
-      "document": "ticket_to_ride.pdf",
-      "section_title": "Shuffle the Train Car cards and deal a starting hand of 4 cards to each player \u2211.",
-      "rank": 4
     },
     {
       "document": "monopoly.pdf",
       "section_title": "NO, there are no more properties in the bank -",
+      "rank": 4
+    },
+    {
+      "document": "monopoly.pdf",
+      "section_title": "CLASSIC MONOPOW RULES",
       "rank": 5
     }
   ],
   "subsection_analysis": [
     {
       "document": "monopoly.pdf",
-      "text": "and auctions properties and hands out the~r proper Title Deed cards; it sells houses and hotels to the players and loans money when required on mortgages. The Bank collects all taxes, fines, loans and"
+      "text": "MONOPOLY \nProperty Trading Game from Parker Brothers\" \nAGES 8+ \n2 to 8 Players \nContents: Gameboard, 3 dice, tokens, 32 houses, I2 hotels, Chance \nand Community Chest cards, Title Deed cards, play mon"
     },
     {
       "document": "monopoly.pdf",
-      "text": "CLASSIC MONOPOW RULES OBJECT: The object of the game IS to become the wealthiest player through buying, renting and selling property. PREPARATION: Place the board on a table and put the Chance and Com"
-    },
-    {
-      "document": "ticket_to_ride.pdf",
-      "text": "You are now ready to begin. Object of the Game The object of the game is to score the highest number of total points. Points can be scored by: u Claiming a Route between two adjacent cities on the map"
-    },
-    {
-      "document": "ticket_to_ride.pdf",
-      "text": "Shuffle the Train Car cards and deal a starting hand of 4 cards to each player \u2211. Place the remaining deck of Train Car cards near the board and turn the top five cards from the deck face-up \u220f. Place "
+      "text": "Bus: This lets you \"get off the bus early.\" Look at the two white \ndice. You can move the value of one die, the other die, or the \nsum of both dice. So if you rolled a 1 and a 5, you can move \n1 space"
     },
     {
       "document": "monopoly.pdf",
-      "text": "NO, there are no more properties in the bank - Advance to the NOCT property on which you will owe another player money. A few minor details: Only the white dice are used when determining if you rolled"
+      "text": "and auctions properties and hands out the~r proper Title Deed cards; \nit sells houses and hotels to the players and loans money when \nrequired on mortgages. \nThe Bank collects all taxes, fines, loans"
+    },
+    {
+      "document": "monopoly.pdf",
+      "text": "NO, there are no more properties in the bank - \nAdvance to the \nNOCT property on which you will owe another player money. \nA few minor details: \nOnly the white dice are used when determining if you ro"
+    },
+    {
+      "document": "monopoly.pdf",
+      "text": "CLASSIC MONOPOW RULES \nOBJECT: The object of the game IS to become the \nwealthiest player through buying, renting and selling \nproperty. \nPREPARATION: Place the board on a table and put \nthe Chance an"
     }
   ]
 }

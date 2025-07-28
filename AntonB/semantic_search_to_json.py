@@ -26,19 +26,8 @@ def _clean_text(text: str) -> str:
     return collapsed.strip()
 
 
-class FastEmbedEmbeddings:
-    def __init__(self):
-        self.model = TextEmbedding()
-
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        return list(self.model.embed(texts))
-
-    def embed_query(self, text: str) -> List[float]:
-        return list(self.model.embed([text]))[0]
-
-
-def get_embedding_function() -> FastEmbedEmbeddings:
-    return FastEmbedEmbeddings()
+def get_embedding_function():
+    return TextEmbedding()
 
 
 def load_and_split_documents(
@@ -155,4 +144,5 @@ def Output_Analysis(
     result = output_analysis(query, input_json_path)
 
 # usage example:
-# result = output_analysis('create fillable forms', 'input.json')
+result = output_analysis('create fillable forms', 'input.json')
+print(result)
