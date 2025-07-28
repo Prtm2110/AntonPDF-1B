@@ -5,10 +5,10 @@
     "difficulty": "Intermediate"
   },
   "documents": [ 
-    "/home/lord_grivous/Desktop/1Breal/AntonB/data/1.pdf",
-    "/home/lord_grivous/Desktop/1Breal/AntonB/data/2.pdf",
-    "/home/lord_grivous/Desktop/1Breal/AntonB/data/monopoly.pdf",
-    "/home/lord_grivous/Desktop/1Breal/AntonB/data/ticket_to_ride.pdf"
+    "data/1.pdf",
+    "data/2.pdf",
+    "data/monopoly.pdf",
+    "data/ticket_to_ride.pdf"
   ],
   "persona": { "role": "Game Pro" },
   "job_to_be_done": { "task": "Create and manage fillable forms for onboarding and compliance." }
