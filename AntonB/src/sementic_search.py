@@ -11,6 +11,26 @@ from langchain.schema.document import Document
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+def clean_text(text: str) -> str:
+    """
+    Clean raw text by:
+    - replacing newlines and excessive whitespace with '. '
+    - ensuring first character is uppercase
+    - normalizing unicode apostrophes and quotes
+    - trimming leading/trailing punctuation
+    """
+    # Normalize unicode characters
+    text = text.replace('\u2019', "'")        # right single quote
+    text = text.replace('\u201c', '"').replace('\u201d', '"')  # double quotes
+    # Replace line breaks and excessive whitespace with '. '
+    text = re.sub(r"\s*\n+\s*", '. ', text)
+    text = re.sub(r"[ ]{2,}", ' ', text)
+    # Trim
+    text = text.strip(' .')
+    # Capitalize first letter
+    if text:
+        text = text[0].upper() + text[1:]
+    return text
 
 def get_embedding_function():
     """
@@ -106,10 +126,15 @@ def query_and_format(
     query: str,
     top_k: int = 5
 ) -> Dict[str, Any]:
+    # 1. Run the similarity search
     results = db.similarity_search_with_score(query, k=top_k)
-    raw = input_meta.get('documents', [])
-    docs_list = [os.path.basename(item['filename']) if isinstance(item, dict) else os.path.basename(item)
-                 for item in raw]
+
+    # 2. Prepare the metadata
+    raw_docs = input_meta.get('documents', [])
+    docs_list = [
+        os.path.basename(item['filename']) if isinstance(item, dict) else os.path.basename(item)
+        for item in raw_docs
+    ]
 
     out: Dict[str, Any] = {
         'metadata': {
@@ -121,7 +146,8 @@ def query_and_format(
         'subsection_analysis': []
     }
 
-    for rank, (doc, _) in enumerate(results, 1):
+    # 3. Populate extracted_sections (titles & ranks)
+    for rank, (doc, _) in enumerate(results, start=1):
         lines = [ln.strip() for ln in doc.page_content.splitlines() if ln.strip()]
         title = lines[0] if lines else ''
         out['extracted_sections'].append({
@@ -130,11 +156,13 @@ def query_and_format(
             'rank': rank
         })
 
+    # 4. Populate subsection_analysis (cleaned snippets)
     for doc, _ in results:
-        snippet = doc.page_content[:200].strip()
+        raw = doc.page_content[:200]
+        cleaned = clean_text(raw)
         out['subsection_analysis'].append({
             'document': doc.metadata['source'],
-            'text': snippet
+            'text': cleaned
         })
 
     return out
