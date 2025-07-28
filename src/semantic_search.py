@@ -17,6 +17,19 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 def clean_text(text: str) -> str:
+    # Normalize common unicode ligatures → ASCII
+    ligatures = {
+        '\ufb00': 'ff',  # ﬀ
+        '\ufb01': 'fi',  # ﬁ
+        '\ufb02': 'fl',  # ﬂ
+        '\ufb03': 'ffi', # ﬃ
+        '\ufb04': 'ffl', # ﬄ
+        '\ufb05': 'ft',  # ﬅ
+        '\ufb06': 'st',  # ﬆ
+    }
+    for uni, ascii_equiv in ligatures.items():
+        text = text.replace(uni, ascii_equiv)
+
     # Convert unicode bullets to a dash
     # Handle both explicit escape and actual char
     text = text.replace('\\u2022', '-')
@@ -79,7 +92,7 @@ def load_and_split_documents(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
         length_function=len,
-        separators=['\. ', '\n\n', '\n', ' ', '']
+        separators=['\\. ', '\n\n', '\n', ' ', '']
     )
 
     for fname in sorted(os.listdir(data_path)):
@@ -124,10 +137,7 @@ def build_chroma(
     
     # Use provided embedding function or fall back to global one
     if embedding_function is None:
-        embedding_function = globals().get('embedded_fn')
-        if embedding_function is None:
-            # Create default embedding function if none exists
-            embedding_function = get_embedding_function()
+        embedding_function = globals().get('embedded_fn') or get_embedding_function()
     
     db = Chroma(persist_directory=persist_directory, embedding_function=embedding_function)
     calculate_chunk_ids(chunks)
@@ -157,9 +167,14 @@ def query_and_format(
         lines = [ln.strip() for ln in doc.page_content.splitlines() if ln.strip()]
         title = lines[0] if lines else ''
         out['extracted_sections'].append({'document': doc.metadata['source'], 'section_title': title, 'rank': rank})
+
     for doc, _ in results:
-        raw = doc.page_content[:200]
-        cleaned = clean_text(raw)
+        # snippet truncated at last full stop
+        raw_snippet = doc.page_content[:200]
+        last_dot = raw_snippet.rfind('.')
+        if last_dot != -1:
+            raw_snippet = raw_snippet[: last_dot + 1]
+        cleaned = clean_text(raw_snippet)
         out['subsection_analysis'].append({'document': doc.metadata['source'], 'text': cleaned})
     return out
 
@@ -173,13 +188,11 @@ def get_json_result_for_query(
         input_spec_path = os.path.abspath(input_spec)
         with open(input_spec_path) as f:
             spec = json.load(f)
-        # Get the directory containing the input spec file
         spec_dir = os.path.dirname(input_spec_path)
     else:
         spec = input_spec
         spec_dir = os.getcwd()
 
-    # Create embedding function for this query
     embedding_fn = get_embedding_function(model_path)
 
     if 'query' in spec:
@@ -190,27 +203,20 @@ def get_json_result_for_query(
         if not query:
             raise ValueError("Specification must include a 'query' field or a 'challenge_info.description'.")
 
-    # Make paths absolute and robust
     data_path = spec.get('data_path')
     if not data_path:
         common_dir_names = ['data', 'PDFs', 'pdfs', 'documents', 'docs']
-        data_path = None
-        for dir_name in common_dir_names:
-            candidate_path = os.path.join(spec_dir, dir_name)
-            if os.path.exists(candidate_path):
-                data_path = candidate_path
-                break
+        data_path = next((os.path.join(spec_dir, d) for d in common_dir_names if os.path.exists(os.path.join(spec_dir, d))), None)
         if not data_path:
             data_path = os.path.join(spec_dir, 'data')
     else:
         if not os.path.isabs(data_path):
             data_path = os.path.join(spec_dir, data_path)
-    persist_dir = spec.get('persist_dir')
-    if not persist_dir:
-        persist_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'chroma')
-    else:
-        if not os.path.isabs(persist_dir):
-            persist_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), persist_dir)
+
+    persist_dir = spec.get('persist_dir') or os.path.join(os.path.dirname(os.path.abspath(__file__)), 'chroma')
+    if not os.path.isabs(persist_dir):
+        persist_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), persist_dir)
+
     if not os.path.exists(data_path):
         raise FileNotFoundError(f"Data directory not found: {data_path}")
 
@@ -237,7 +243,6 @@ def main():
     args = parser.parse_args()
     model_path = args.model_path or os.getenv('FASTEMBED_EMBEDDING_MODEL')
     
-    # Keep global for backward compatibility but it's no longer required
     global embedded_fn
     embedded_fn = get_embedding_function(model_path)
 
