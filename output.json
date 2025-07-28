@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "input_documents": [
+      "1.pdf",
+      "2.pdf",
+      "monopoly.pdf",
+      "ticket_to_ride.pdf"
+    ],
+    "persona": "Game Pro",
+    "job_to_be_done": "Create and manage fillable forms for onboarding and compliance."
+  },
+  "extracted_sections": [
+    {
+      "document": "3.pdf",
+      "section_title": "Appendix C:",
+      "rank": 1
+    },
+    {
+      "document": "3.pdf",
+      "section_title": "connecting to portal initiatives.",
+      "rank": 2
+    },
+    {
+      "document": "3.pdf",
+      "section_title": "has acted as a catalyst, bringing together the stakeholders needed to create the Ontario",
+      "rank": 3
+    },
+    {
+      "document": "3.pdf",
+      "section_title": "schools as partners; it has 250 member libraries. ODL envisions universal access for all",
+      "rank": 4
+    },
+    {
+      "document": "3.pdf",
+      "section_title": "Local points of entry:",
+      "rank": 5
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "3.pdf",
+      "text": "Appendix C:. ODL's Envisioned Electronic Resources. The purpose of the ODL is to provide equal access to information for all Ontario citizens through. collaboration and resource sharing. ODL will be a"
+    },
+    {
+      "document": "3.pdf",
+      "text": "Connecting to portal initiatives.. Support of the Ontario E-Learning strategy through a collaborative digital. library initiative that positions Ontario on the global e-learning scene. Improved access"
+    },
+    {
+      "document": "3.pdf",
+      "text": "Has acted as a catalyst, bringing together the stakeholders needed to create the Ontario. Digital Library (ODL). These stakeholders include Ontario's 5000+ public libraries, university,. college, and"
+    },
+    {
+      "document": "3.pdf",
+      "text": "Schools as partners; it has 250 member libraries. ODL envisions universal access for all. 10,000,000 Ontarians, with more than 5000 Ontario libraries as partners. Although ODL can. learn from TAL's pr"
+    },
+    {
+      "document": "3.pdf",
+      "text": "Local points of entry:. We will provide the licenses, infrastructure, services and support that enable local. libraries to provide exceptional services to their clientele. ODL will focus on support,"
+    }
+  ]
+}

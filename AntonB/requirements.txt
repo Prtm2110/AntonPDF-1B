@@ -1,6 +1,0 @@
-fastembed
-pymupdf4llm
-langchain-chroma
-langchain-community
-langchain-text-splitters
-
